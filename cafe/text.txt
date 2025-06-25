@@ -19,3 +19,8 @@ ALORS le Brewer ne reçoit pas d'ordre
 ETANT DONNE une machine a café
 QUAND on insère une pièce de 50cts deux fois
 ALORS le Brewer reçoit deux fois l'ordre de faire un café
+
+
+
+- produits divers (chocolat, latté, cappucino, etc.) -> à nous d'appeler le brewer pour qu'il fasse sa recette -> question : grille tarifaire
+- on peut ajouter à ces produits de 0 à 5 sucres (s'il en reste)
