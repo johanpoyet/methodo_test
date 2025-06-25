@@ -19,3 +19,7 @@ ALORS le Brewer ne reçoit pas d'ordre
 ETANT DONNE une machine a café
 QUAND on insère une pièce de 50cts deux fois
 ALORS le Brewer reçoit deux fois l'ordre de faire un café
+
+produit diver chocolat latte 
+prix different en fonctionne 
+sucre entre 0 a 5 dose
