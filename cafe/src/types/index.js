@@ -1,10 +1,12 @@
-export interface ProductType {
-  name: string;
-  price: number;
-  sugarLevel: number; // 0 to 5
-}
+/**
+ * @typedef {Object} ProductType
+ * @property {string} name
+ * @property {number} price
+ * @property {number} sugarLevel // 0 to 5
+ */
 
-export interface StockType {
-  ingredient: string;
-  amount: number;
-}
+/**
+ * @typedef {Object} StockType
+ * @property {string} ingredient
+ * @property {number} amount
+ */

@@ -5,6 +5,7 @@ class Stock {
       coffee: 0,
       chocolate: 0,
       cacao: 0,
+      milk: 0,
       // eau illimitée, donc pas de stock
     };
   }
