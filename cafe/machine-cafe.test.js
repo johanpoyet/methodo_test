@@ -1,4 +1,4 @@
-const { MachineCafe, Brewer } = require('./machine-cafe');
+// const { MachineCafe, Brewer } = require('./machine-cafe');
 
 // Builder Pattern pour construire les objets de test
 class MachineBuilder {
