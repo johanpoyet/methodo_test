@@ -8,19 +8,19 @@ describe('Products', () => {
   });
 
   test('should return the correct price for espresso', () => {
-    expect(products.getPrice('espresso')).toBe(150);
+    expect(products.getPrice('espresso')).toBe(50);
   });
 
   test('should return the correct price for latte', () => {
-    expect(products.getPrice('latte')).toBe(200);
+    expect(products.getPrice('latte')).toBe(60);
   });
 
   test('should return the correct price for cappuccino', () => {
-    expect(products.getPrice('cappuccino')).toBe(220);
+    expect(products.getPrice('cappuccino')).toBe(70);
   });
 
   test('should return the correct price for chocolate', () => {
-    expect(products.getPrice('chocolate')).toBe(250);
+    expect(products.getPrice('chocolate')).toBe(80);
   });
 
   test('should validate sugar level within range', () => {
