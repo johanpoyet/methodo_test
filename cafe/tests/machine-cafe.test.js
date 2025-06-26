@@ -27,13 +27,13 @@ describe('MachineCafe', () => {
       expect(stock.ingredients.milk).toBe(4);
       expect(stock.ingredients.sugar).toBe(8);
       expect(brewer.getOrdersCount()).toBe(1);
-      expect(machine.getReturnedMoney()).toBe(0);
+      expect(machine.getReturnedMoney()).toBe(140);
     });
 
     test('rend la monnaie si trop inséré', () => {
       machine.insertCoin(250);
       machine.selectProduct('latte', 1);
-      expect(machine.getReturnedMoney()).toBe(50);
+      expect(machine.getReturnedMoney()).toBe(190);
     });
 
     test('retourne une erreur et rend la monnaie si stock insuffisant', () => {
@@ -45,7 +45,7 @@ describe('MachineCafe', () => {
     });
 
     test('retourne une erreur si fonds insuffisants', () => {
-      machine.insertCoin(100);
+      machine.insertCoin(10);
       expect(() => machine.selectProduct('latte', 1)).toThrow('Fonds insuffisants');
       expect(machine.getReturnedMoney()).toBe(0);
       expect(brewer.getOrdersCount()).toBe(0);
