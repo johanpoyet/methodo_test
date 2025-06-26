@@ -7,12 +7,12 @@ ET le stock de café passe à 4
 ET le stock de lait passe à 4  
 ET le stock de sucre passe à 8
 ET le Brewer reçoit 1 commande
-ET aucune monnaie n'est rendue
+ET la monnaie rendue est de 140 centimes (200 - 60)
 
 ETANT DONNE une machine a café avec stock suffisant
 QUAND on insère 250 centimes et on sélectionne un latte
 ALORS la boisson est préparée
-ET la monnaie rendue est de 50 centimes
+ET la monnaie rendue est de 190 centimes (250 - 60)
 
 ETANT DONNE une machine a café avec stock insuffisant (lait=0)
 QUAND on insère 200 centimes et on sélectionne un latte
@@ -21,7 +21,7 @@ ET la monnaie de 200 centimes est rendue
 ET le Brewer ne reçoit aucune commande
 
 ETANT DONNE une machine a café avec stock suffisant
-QUAND on insère 100 centimes et on sélectionne un latte (prix=200)
+QUAND on insère 10 centimes et on sélectionne un latte (prix=60)
 ALORS une erreur "Fonds insuffisants" est levée
 ET aucune monnaie n'est rendue
 ET le Brewer ne reçoit aucune commande
@@ -96,19 +96,19 @@ ALORS une erreur "Not enough coffee in stock" est levée
 
 ETANT DONNE une liste de produits
 QUAND on demande le prix de l'espresso
-ALORS le prix retourné est 150
+ALORS le prix retourné est 50
 
 ETANT DONNE une liste de produits
 QUAND on demande le prix du latte
-ALORS le prix retourné est 200
+ALORS le prix retourné est 60
 
 ETANT DONNE une liste de produits
 QUAND on demande le prix du cappuccino
-ALORS le prix retourné est 220
+ALORS le prix retourné est 70
 
 ETANT DONNE une liste de produits
 QUAND on demande le prix du chocolat
-ALORS le prix retourné est 250
+ALORS le prix retourné est 80
 
 ETANT DONNE une validation de niveau de sucre
 QUAND on valide un niveau de 0
@@ -152,11 +152,11 @@ ALORS une erreur "Product not found" est levée
 
 === RÉSUMÉ DES RÈGLES MÉTIER ===
 
-Produits disponibles : espresso (150), latte (200), cappuccino (220), chocolat (250)
+Produits disponibles : espresso (50), latte (60), cappuccino (70), chocolat (80)
 Prix en centimes
 Sucre entre 0 à 5 doses maximum
 Eau illimitée (pas de gestion de stock)
 Ingrédients gérés : sucre, café, chocolat, cacao, lait
 Machine peut être défaillante (restitue toujours l'argent)
 Monnaie rendue automatiquement si trop-perçu
-Vérification du stock
+Vérification du stock avant préparation
