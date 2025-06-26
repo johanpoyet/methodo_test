@@ -1,26 +1,162 @@
-ETANT DONNE une machine a café
-QUAND on insère une pièce de 50cts ou plus
-ALORS le Brewer reçoit l'ordre de faire un café
-CAS 50cts, 1€, 2€
- 
-ETANT DONNE une machine a café
-QUAND on insère une pièce de moins de 50cts
-ALORS le Brewer ne reçoit pas d'ordre
-ET l'argent est restitué
-CAS 1ct, 2cts, 5cts, 10cts, 20cts
- 
-ETANT DONNE une machine a café défaillante
-QUAND on insère une pièce de 50cts
-ALORS l'argent est restitué
- 
-ETANT DONNE une machine a café
-ALORS le Brewer ne reçoit pas d'ordre
- 
-ETANT DONNE une machine a café
-QUAND on insère une pièce de 50cts deux fois
-ALORS le Brewer reçoit deux fois l'ordre de faire un café
+=== TESTS MACHINE À CAFÉ ===
 
+ETANT DONNE une machine a café avec stock suffisant (café=5, lait=5, chocolat=2, sucre=10)
+QUAND on insère 200 centimes et on sélectionne un latte avec 2 doses de sucre
+ALORS la boisson est préparée "Voici votre latte avec 2 sucre(s) !"
+ET le stock de café passe à 4
+ET le stock de lait passe à 4  
+ET le stock de sucre passe à 8
+ET le Brewer reçoit 1 commande
+ET aucune monnaie n'est rendue
 
+ETANT DONNE une machine a café avec stock suffisant
+QUAND on insère 250 centimes et on sélectionne un latte
+ALORS la boisson est préparée
+ET la monnaie rendue est de 50 centimes
 
-- produits divers (chocolat, latté, cappucino, etc.) -> à nous d'appeler le brewer pour qu'il fasse sa recette -> question : grille tarifaire
-- on peut ajouter à ces produits de 0 à 5 sucres (s'il en reste)
+ETANT DONNE une machine a café avec stock insuffisant (lait=0)
+QUAND on insère 200 centimes et on sélectionne un latte
+ALORS une erreur "Produit indisponible" est levée
+ET la monnaie de 200 centimes est rendue
+ET le Brewer ne reçoit aucune commande
+
+ETANT DONNE une machine a café avec stock suffisant
+QUAND on insère 100 centimes et on sélectionne un latte (prix=200)
+ALORS une erreur "Fonds insuffisants" est levée
+ET aucune monnaie n'est rendue
+ET le Brewer ne reçoit aucune commande
+
+ETANT DONNE une machine a café avec stock suffisant
+QUAND on insère 200 centimes et on sélectionne un latte avec 6 doses de sucre
+ALORS une erreur "Sugar level must be between 0 and 5" est levée
+ET aucune monnaie n'est rendue
+ET le Brewer ne reçoit aucune commande
+
+ETANT DONNE une machine a café avec stock suffisant
+QUAND on insère 200 centimes et on sélectionne un produit inexistant
+ALORS une erreur "Produit inconnu" est levée
+ET la monnaie de 200 centimes est rendue
+ET le Brewer ne reçoit aucune commande
+
+=== TESTS GESTION DU STOCK ===
+
+ETANT DONNE un stock vide
+QUAND on ajoute 2 doses de café
+ALORS le café est disponible dans le stock
+QUAND on utilise 1 dose de café
+ALORS il reste 1 dose de café dans le stock
+
+ETANT DONNE un stock vide
+QUAND on ajoute 3 doses de lait
+ALORS le lait est disponible pour 2 doses
+QUAND on utilise 2 doses de lait
+ALORS il reste 1 dose de lait dans le stock
+
+ETANT DONNE un stock vide
+QUAND on ajoute 1 dose de chocolat
+ALORS le chocolat est disponible
+QUAND on utilise 1 dose de chocolat
+ALORS il reste 0 dose de chocolat dans le stock
+
+ETANT DONNE un stock vide
+QUAND on ajoute 2 doses de cacao
+ALORS le cacao est disponible pour 2 doses
+QUAND on utilise 2 doses de cacao
+ALORS il reste 0 dose de cacao dans le stock
+
+ETANT DONNE un stock vide
+QUAND on ajoute 5 doses de sucre
+ALORS le sucre est disponible pour 3 doses
+QUAND on utilise 3 doses de sucre
+ALORS il reste 2 doses de sucre dans le stock
+
+ETANT DONNE un stock quelconque
+QUAND on vérifie la disponibilité de l'eau (1000 doses)
+ALORS l'eau est toujours disponible (illimitée)
+QUAND on utilise 1000 doses d'eau
+ALORS aucune erreur n'est levée
+
+ETANT DONNE un stock vide
+QUAND on essaie d'ajouter un ingrédient inconnu
+ALORS une erreur est levée
+
+ETANT DONNE un stock vide
+QUAND on vérifie la disponibilité d'un ingrédient inconnu
+ALORS une erreur est levée
+
+ETANT DONNE un stock vide
+QUAND on essaie d'utiliser un ingrédient inconnu
+ALORS une erreur est levée
+
+ETANT DONNE un stock avec 1 dose de café
+QUAND on essaie d'utiliser 2 doses de café
+ALORS une erreur "Not enough coffee in stock" est levée
+
+=== TESTS PRODUITS ET PRIX ===
+
+ETANT DONNE une liste de produits
+QUAND on demande le prix de l'espresso
+ALORS le prix retourné est 150
+
+ETANT DONNE une liste de produits
+QUAND on demande le prix du latte
+ALORS le prix retourné est 200
+
+ETANT DONNE une liste de produits
+QUAND on demande le prix du cappuccino
+ALORS le prix retourné est 220
+
+ETANT DONNE une liste de produits
+QUAND on demande le prix du chocolat
+ALORS le prix retourné est 250
+
+ETANT DONNE une validation de niveau de sucre
+QUAND on valide un niveau de 0
+ALORS aucune erreur n'est levée
+
+ETANT DONNE une validation de niveau de sucre
+QUAND on valide un niveau de 5
+ALORS aucune erreur n'est levée
+
+ETANT DONNE une validation de niveau de sucre
+QUAND on valide un niveau de 6
+ALORS une erreur "Sugar level must be between 0 and 5" est levée
+
+ETANT DONNE une validation de niveau de sucre
+QUAND on valide un niveau de -1
+ALORS une erreur "Sugar level must be between 0 and 5" est levée
+
+ETANT DONNE une liste de produits
+QUAND on demande le prix d'un produit inexistant
+ALORS une erreur "Product not found" est levée
+
+ETANT DONNE une liste de produits
+QUAND on demande les ingrédients de l'espresso
+ALORS les ingrédients retournés sont { coffee: 1 }
+
+ETANT DONNE une liste de produits
+QUAND on demande les ingrédients du latte
+ALORS les ingrédients retournés sont { coffee: 1, milk: 1 }
+
+ETANT DONNE une liste de produits
+QUAND on demande les ingrédients du cappuccino
+ALORS les ingrédients retournés sont { coffee: 1, milk: 2 }
+
+ETANT DONNE une liste de produits
+QUAND on demande les ingrédients du chocolat
+ALORS les ingrédients retournés sont { chocolate: 1, milk: 1 }
+
+ETANT DONNE une liste de produits
+QUAND on demande les ingrédients d'un produit inexistant
+ALORS une erreur "Product not found" est levée
+
+=== RÉSUMÉ DES RÈGLES MÉTIER ===
+
+Produits disponibles : espresso (150), latte (200), cappuccino (220), chocolat (250)
+Prix en centimes
+Sucre entre 0 à 5 doses maximum
+Eau illimitée (pas de gestion de stock)
+Ingrédients gérés : sucre, café, chocolat, cacao, lait
+Machine peut être défaillante (restitue toujours l'argent)
+Monnaie rendue automatiquement si trop-perçu
+Vérification du stock
