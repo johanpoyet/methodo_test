@@ -1,10 +1,10 @@
 class Products {
   constructor() {
     this.products = {
-      espresso: { price: 150, ingredients: { coffee: 1 }, sugarLevel: 0 },
-      latte: { price: 200, ingredients: { coffee: 1, milk: 1 }, sugarLevel: 0 },
-      cappuccino: { price: 220, ingredients: { coffee: 1, milk: 2 }, sugarLevel: 0 },
-      chocolate: { price: 250, ingredients: { chocolate: 1, milk: 1 }, sugarLevel: 0 },
+      espresso: { price: 50, ingredients: { coffee: 1 }, sugarLevel: 0 },
+      latte: { price: 60, ingredients: { coffee: 1, milk: 1 }, sugarLevel: 0 },
+      cappuccino: { price: 70, ingredients: { coffee: 1, milk: 2 }, sugarLevel: 0 },
+      chocolate: { price: 80, ingredients: { chocolate: 1, milk: 1 }, sugarLevel: 0 },
     };
   }
 
